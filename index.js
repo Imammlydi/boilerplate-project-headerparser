@@ -1,5 +1,4 @@
-// index.js
-// where your node app starts
+
 
 // init project
 require('dotenv').config();
@@ -26,7 +25,7 @@ app.get('/api/hello', function (req, res) {
 
 // API endpoint to parse request headers
 app.get('/api/whoami', function (req, res) {
-  const ipaddress = req.ip;
+  const ipaddress = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   const language = req.headers['accept-language'];
   const software = req.headers['user-agent'];
 
